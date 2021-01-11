@@ -1,0 +1,20 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalibryyy/news-explorer-api.git"
+  },
+  "author": "Yelena_Strizhakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kalibryyy/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Kalibryyy/news-explorer-api#readme"
+}
