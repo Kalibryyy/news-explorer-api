@@ -1,6 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-
-const pattern = /^https?:\/{2}w{0,3}\.?[\wа-яё\S]{0,}/i;
+const validator = require('validator');
 
 const validateCreateUser = celebrate({
   body: Joi.object().keys({
@@ -26,14 +25,24 @@ const validatePostArticle = celebrate({
     text: Joi.string().min(2).max(10000).required(),
     date: Joi.string().min(4).max(100).required(),
     source: Joi.string().min(2).max(10000).required(),
-    link: Joi.string().required().pattern(pattern),
-    image: Joi.string().required().pattern(pattern),
+    link: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('в поле link должен быть валидный url-адрес');
+    }),
+    image: Joi.string().required().custom((value, helpers) => {
+      if (validator.isURL(value)) {
+        return value;
+      }
+      return helpers.message('в поле image должен быть валидный url-адрес');
+    }),
   }),
 });
 
 const validateDeleteArticle = celebrate({
   params: Joi.object().keys({
-    articleId: Joi.string().alphanum().length(24),
+    articleId: Joi.string().alphanum().length(24).hex(),
   }),
 });
 

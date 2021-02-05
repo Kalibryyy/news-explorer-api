@@ -7,7 +7,7 @@ const errorMessages = require('../configs/error-messages');
 const getArticles = (req, res, next) => {
   Article.find({})
     .then((articles) => {
-      res.status(200).send(articles);
+      res.send(articles);
     })
     .catch((err) => errorHandler(res, err, next));
 };
@@ -22,7 +22,7 @@ const postArticle = (req, res, next) => {
     keyword, title, text, date, source, link, image, owner: _id,
   })
     .then((article) => {
-      res.status(200).send(article);
+      res.send(article);
     })
     .catch((err) => errorHandler(res, err, next));
 };
@@ -39,9 +39,9 @@ const deleteArticle = (req, res, next) => {
       if (!article.owner.equals(_id)) {
         next(new ForbiddenError(errorMessages.forbiddenError.article));
       }
-      return Article.findByIdAndRemove(articleId)
+      return Article.deleteOne(article)
         .then(() => {
-          res.status(200).send(article);
+          res.send(article);
         })
         .catch((err) => errorHandler(res, err, next));
     })

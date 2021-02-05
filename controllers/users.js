@@ -22,7 +22,7 @@ const createUser = (req, res, next) => {
     name, email, password,
   })
     .then((user) => {
-      res.status(200).send({
+      res.send({
         name: user.name,
         email: user.email,
       });
@@ -46,7 +46,7 @@ const login = (req, res, next) => {
         { expiresIn: '7d' },
       );
 
-      res.status(200).send({ token });
+      res.send({ token });
     })
     .catch(() => {
       next(new UnauthorizedError(errorMessages.unauthorizedError.user));
@@ -60,7 +60,7 @@ const getCurrentUser = (req, res, next) => {
     .orFail(() => {
       next(new NotFoundError(errorMessages.notFoundError.user));
     })
-    .then((user) => res.status(200).send({
+    .then((user) => res.send({
       email: user.email,
       name: user.name,
     }))

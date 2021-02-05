@@ -39,7 +39,7 @@ const articleSchema = new mongoose.Schema({
       validator(v) {
         return validator.isURL(v);
       },
-      message: 'поле "link" должно быть валидным url-адресом',
+      message: 'в поле link должен быть валидный url-адрес',
     },
   },
   image: {
@@ -49,7 +49,7 @@ const articleSchema = new mongoose.Schema({
       validator(v) {
         return validator.isURL(v);
       },
-      message: 'поле "image" должно быть валидным url-адресом',
+      message: 'в поле image должен быть валидный url-адрес',
     },
   },
   owner: {
