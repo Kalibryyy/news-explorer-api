@@ -13,7 +13,7 @@ const getArticles = (req, res, next) => {
       }
       res.send(articles);
     })
-    .catch((err) => errorHandler(res, err, next));;
+    .catch((err) => errorHandler(res, err, next));
 };
 
 const postArticle = (req, res, next) => {
