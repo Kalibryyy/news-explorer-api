@@ -5,8 +5,12 @@ const ForbiddenError = require('../errors/forbidden-err');
 const errorMessages = require('../configs/error-messages');
 
 const getArticles = (req, res, next) => {
-  Article.find({})
+  const { _id } = req.user;
+  Article.find({ owner: _id })
     .then((articles) => {
+      if (!articles.length) {
+        res.status(200).send([]);
+      }
       res.send(articles);
     })
     .catch((err) => errorHandler(res, err, next));
